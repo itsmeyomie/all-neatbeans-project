@@ -1,0 +1,82 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package quicksort;
+
+import java.util.Arrays;
+
+public class QuickSort {
+
+    static int partition(int array[], int low, int high) {
+
+        // choose the rightmost element as pivot
+        int pivot = array[high];
+
+        // pointer for greater element
+        int i = (low - 1);
+
+        // traverse through all elements
+        // compare each element with pivot
+        for (int j = low; j < high; j++) {
+            if (array[j] <= pivot) {
+
+                // if element smaller than pivot is found
+                // swap it with the greater element pointed by i
+                i++;
+                System.out.println(i);
+                // swapping element at i with element at j
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+
+                System.out.println(array[i]);
+            }
+
+        }
+
+        // swapt the pivot element with the greater element specified by i
+        int temp = array[i + 1];
+        array[i + 1] = array[high];
+        array[high] = temp;
+
+        // return the position from where partition is done
+        i++;
+        System.out.println(Arrays.toString(array));
+        return (i);
+
+    }
+
+    static void quickSort(int array[], int low, int high) {
+        if (low < high) {
+
+            // find pivot element such that
+            // elements smaller than pivot are on the left
+            // elements greater than pivot are on the right
+            int pi = partition(array, low, high);
+
+            // recursive call on the left of pivot
+            quickSort(array, low, pi - 1);
+
+            // recursive call on the right of pivot
+            quickSort(array, pi + 1, high);
+        }
+    }
+
+// Main class
+    public static void main(String args[]) {
+//
+        int[] data = {5, 3, 2, 7, 4};
+        System.out.println("Unsorted Array");
+        System.out.println(Arrays.toString(data));
+
+        int size = data.length;
+
+        // call quicksort() on array data
+        quickSort(data, 0, size - 1);
+
+        System.out.println("Sorted Array in Ascending Order ");
+        System.out.println(Arrays.toString(data));
+    }
+}

@@ -1,0 +1,29 @@
+group 'com.africastalking.example'
+version '1.0.0'
+
+apply plugin: 'application'
+mainClassName = "com.africastalking.example.App"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'org.slf4j:slf4j-simple:1.7.21'
+    implementation 'com.sparkjava:spark-core:2.5.4'
+    implementation 'com.sparkjava:spark-template-handlebars:2.3'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    // compile 'com.github.AfricasTalkingLtd.africastalking-java:core:develop-SNAPSHOT'
+    compile project(":core")
+    testImplementation 'junit:junit:4.11'
+}
+
+task runApp(type: JavaExec, dependsOn: classes){
+    description = "Simple App Server"
+    main = "com.africastalking.example.App"
+    classpath = sourceSets.main.runtimeClasspath
+}
